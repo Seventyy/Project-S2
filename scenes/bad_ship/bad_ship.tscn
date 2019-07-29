@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/enemy/enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/enemy_projectile/enemy_projectile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://graphics/enemy_ship.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 50.0
+
+[node name="Enemy" index="0" instance=ExtResource( 1 )]
+hp = 10.0
+body_damage = 2.0
+projectile = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )

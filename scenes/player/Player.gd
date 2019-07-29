@@ -2,6 +2,10 @@ extends Area2D
 
 class_name Player
 
+export(float) var hp
+export(PackedScene) var projectile
+export(float) var body_damage
+
 var velocity = Vector2()
 var direction = Vector2()
 var momentum = Vector2()
@@ -12,7 +16,6 @@ export(float, 1) var friction=0.9
 export var up_speed=500
 export var side_speed=700
 export var down_speed=900
-
 
 const UP=Vector2(0,-1)
 const DOWN=Vector2(0,1)
@@ -55,12 +58,12 @@ func applyMovement():
 
 func shooting():
 	if shot_available and Input.is_key_pressed(KEY_SPACE):
-		var projectile_scene=load("res://scenes/PlayerProjectile/PlayerProjectile.tscn")
-		var projectile=projectile_scene.instance()
-		projectile.set_position(self.position)
-		self.owner.add_child(projectile)
-		shot_available=false
-		get_node("FireRate").start()
+		if projectile!=null:
+			var projectile_unpacked=projectile.instance()
+			projectile_unpacked.set_position(self.position)
+			owner.add_child(projectile_unpacked)
+			shot_available=false
+			get_node("FireRate").start()
 
 func enable_shot():
 	shot_available=true
@@ -79,9 +82,25 @@ func stop_on_screen_edges():
 	if position.y>720:
 		position.y=720
 		velocity.y=0
-		
+
+func checkLife():
+	if hp<=0:
+		get_tree().queue_delete(self)
+		get_tree().change_scene("res://scenes/death_screen/death_screen.tscn")
+
 func _process(delta):
+	checkLife()
 	shooting()
 	applyMovement()
 	stop_on_screen_edges()
 	translate(velocity*delta)
+
+func onAreaEntered(area):
+	if area is Projectile:
+		if area.dmg_player:
+			hp-=area.damage
+			get_tree().queue_delete(area)
+	elif area is Enemy:
+		area.hp-=self.body_damage
+		self.hp-=area.body_damage
+	pass
