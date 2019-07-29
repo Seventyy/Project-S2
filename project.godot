@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://scenes/player/Player.gd"
+"path": "res://scenes/player/player.gd"
 }, {
 "base": "Area2D",
 "class": "Projectile",

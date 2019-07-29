@@ -4,7 +4,7 @@
 [ext_resource path="res://graphics/background_base.png" type="Texture" id=2]
 [ext_resource path="res://graphics/background_clouds.png" type="Texture" id=3]
 [ext_resource path="res://scenes/bad_ship/bad_ship.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=5]
 
 [node name="Root" type="Node2D"]
 
@@ -17,8 +17,18 @@ texture = ExtResource( 3 )
 layer_speed = 180.0
 
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
-position = Vector2( 562.238, 105.514 )
+position = Vector2( 594.547, 221.826 )
+speed = 500.0
+target_list = [ Vector2( 1280, 200 ), Vector2( 0, 200 ) ]
+
+[node name="Enemy2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1019.67, 369.614 )
+target_list = [ Vector2( 1280, 300 ), Vector2( 0, 300 ) ]
+
+[node name="Enemy3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 104.681, 59.4483 )
+target_list = [ Vector2( 1280, 50 ), Vector2( 0, 50 ) ]
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 571.282, 562.238 )
-body_damage = 5.0
+body_damage = 10.0
