@@ -27,9 +27,8 @@ func shoot():
 			projectile_unpacked.position=self.position
 			owner.add_child(projectile_unpacked)
 
-func onAreaCollision(area):
+func onAreaEntered(area):
 	if area is Projectile:
 		if area.dmg_enemies:
 			hp-=area.damage
 			get_tree().queue_delete(area)
-
