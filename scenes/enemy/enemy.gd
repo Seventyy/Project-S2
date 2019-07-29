@@ -2,35 +2,34 @@ extends Area2D
 
 class_name Enemy
 
-enum MovementType {target_list,target_list_looped}
-
-export(MovementType) var movement_type
 export(float) var hp
-export(float) var body_damage
 export(float) var speed
+export(float) var body_damage
+export(Vector2) var velocity
 
-export(Vector2) var target
-export(Array) var target_array=[Vector2(100,100),Vector2(500,200),Vector2(1000,600),Vector2(1200,50)]
-var target_array_iterator=0
-
-var velocity=Vector2()
+export(PackedScene) var projectile
 
 func move(delta):
-	if target!=position:
-		velocity=(target-position).normalized()*speed*delta
-		if velocity.length()>(target-position).length():
-			position=target
-		else:
-			position+=velocity
-	else:
-		if target_array_iterator<target_array.size()-1:
-			target_array_iterator+=1
-		else:
-			target_array_iterator=0
-		target=target_array[target_array_iterator]
+	position+=velocity.normalized()*speed*delta
 
-func shoot():
-	pass
+func checkLife():
+	if hp<=0:
+		get_tree().queue_delete(self)
 
 func _process(delta):
+	checkLife()
 	move(delta)
+
+func shoot():
+	if projectile!=null:
+		var projectile_unpacked=projectile.instance()
+		if projectile_unpacked is Projectile:
+			projectile_unpacked.position=self.position
+			owner.add_child(projectile_unpacked)
+
+func onAreaCollision(area):
+	if area is Projectile:
+		if area.dmg_enemies:
+			hp-=area.damage
+			get_tree().queue_delete(area)
+

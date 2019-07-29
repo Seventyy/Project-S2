@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/enemy/enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/projectile_example/projectile_example.tscn" type="PackedScene" id=2]
+[ext_resource path="res://graphics/enemy_ship.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 50, 50 )
+
+[node name="EnemyExample" instance=ExtResource( 1 )]
+hp = 10.0
+speed = 100.0
+velocity = Vector2( 1, 0 )
+projectile = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
