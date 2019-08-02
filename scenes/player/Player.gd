@@ -3,8 +3,10 @@ extends Area2D
 class_name Player
 
 export(float) var hp
-export(PackedScene) var projectile
+onready var max_hp=hp
 export(float) var body_damage
+
+export(PackedScene) var projectile
 
 var velocity = Vector2()
 var direction = Vector2()
@@ -64,6 +66,7 @@ func shooting():
 			owner.add_child(projectile_unpacked)
 			shot_available=false
 			get_node("FireRate").start()
+			owner.start_screen_shake()
 
 func enable_shot():
 	shot_available=true
