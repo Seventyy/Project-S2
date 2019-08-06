@@ -66,7 +66,7 @@ func shooting():
 			owner.add_child(projectile_unpacked)
 			shot_available=false
 			get_node("FireRate").start()
-			owner.start_screen_shake()
+			screen_shake.start()
 
 func enable_shot():
 	shot_available=true

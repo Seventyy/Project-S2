@@ -2,9 +2,9 @@ extends Area2D
 
 class_name Enemy
 
-export(float) var hp
+export(float) var hp=1
 onready var max_hp=hp
-export(float) var body_damage
+export(float) var body_damage=0
 
 export(float) var speed
 export(Vector2) var velocity
@@ -18,7 +18,7 @@ func move(delta):
 	position+=velocity.normalized()*speed*delta
 
 func modulateSprite():
-	if sprite_color_modulation==true:
+	if sprite_color_modulation:
 		color_modulation=Color(1,hp/max_hp,hp/max_hp)
 		for i in get_child_count():
 			if get_child(i) is Sprite:
@@ -38,8 +38,8 @@ func shoot():
 	if projectile!=null:
 		var projectile_unpacked=projectile.instance()
 		if projectile_unpacked is Projectile:
-			projectile_unpacked.position=self.position
-			owner.add_child(projectile_unpacked)
+			projectile_unpacked.transform=get_global_transform()
+			get_node("/root/Root").add_child(projectile_unpacked)
 
 func onAreaEntered(area):
 	if area is Projectile:

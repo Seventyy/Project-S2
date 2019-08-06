@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/enemy_pattern/enemy_pattern.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/bad_ship_pattern/bad_ship_pattern.gd" type="Script" id=2]
+[ext_resource path="res://scenes/bad_ship/bad_ship.tscn" type="PackedScene" id=3]
+
+[node name="EnemyPattern" index="0" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Enemy" parent="." index="0" instance=ExtResource( 3 )]
+position = Vector2( 50, 50 )
+
+[node name="Enemy2" parent="." index="1" instance=ExtResource( 3 )]
+position = Vector2( -50, 50 )
+
+[node name="Enemy3" parent="." index="2" instance=ExtResource( 3 )]
+position = Vector2( -50, -50 )
+
+[node name="Enemy4" parent="." index="3" instance=ExtResource( 3 )]
+position = Vector2( 50, -50 )
