@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
-[ext_resource path="res://scenes/pea_projectile/pea_projectile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/projectile_pea/projectile_pea.tscn" type="PackedScene" id=2]
 [ext_resource path="res://graphics/player_ship.png" type="Texture" id=3]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -26,4 +26,4 @@ shape = SubResource( 1 )
 wait_time = 0.5
 autostart = true
 [connection signal="area_entered" from="." to="." method="onAreaEntered"]
-[connection signal="timeout" from="FireRate" to="." method="enable_shot"]
+[connection signal="timeout" from="FireRate" to="." method="enableShot"]
