@@ -1,14 +1,22 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/interface/interface.gd" type="Script" id=1]
+[ext_resource path="res://graphics/health_bar.png" type="Texture" id=2]
 
 [node name="Interface" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 
-[node name="PlayerHpBar" type="ProgressBar" parent="."]
-margin_left = 20.0
-margin_top = 650.0
-margin_right = 290.0
-margin_bottom = 700.0
+[node name="PlayerHpBar" type="TextureProgress" parent="."]
+margin_left = 11.6376
+margin_top = 688.467
+margin_right = 111.638
+margin_bottom = 708.467
+texture_progress = ExtResource( 2 )
+
+[node name="EquippedWeapon" type="TextureRect" parent="."]
+margin_left = 1209.46
+margin_top = 642.86
+margin_right = 1249.46
+margin_bottom = 682.86

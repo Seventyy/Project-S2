@@ -7,6 +7,7 @@ onready var max_hp=hp
 export(float) var body_damage
 
 export(PackedScene) var projectile
+var projectile_icon = load("res://graphics/player_projectile_icon_pea.png")
 
 var velocity = Vector2()
 var direction = Vector2()
@@ -25,6 +26,7 @@ const LEFT=Vector2(-1,0)
 const RIGHT=Vector2(1,0)
 
 var shot_available=false
+var weapons = ["weapon_pea", "weapon_pancake"]
 
 func _ready():
 	set_position(Vector2(get_viewport().size.x/2,get_viewport().size.y*0.90))
@@ -51,7 +53,7 @@ func applyMovement():
 	if direction.y>0 and abs(velocity.y)<down_speed:
 		velocity.y+=direction.y*down_speed/acceleration
 	
-	velocity*=friction
+	velocity*=friction 
 	
 #	if not (Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_S) or Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_D)):
 #		velocity-=velocity.normalized()*friction
@@ -59,20 +61,32 @@ func applyMovement():
 #			velocity=Vector2(0,0)
 
 func shooting():
+	if Input.is_action_just_pressed("Weapon_Change"):
+		weapons.append(weapons[0])
+		weapons.remove(0)
+		if weapons[0] == "weapon_pea":
+			projectile_icon=load("res://graphics/player_projectile_icon_pea.png")
+		if weapons[0] == "weapon_pancake":
+			projectile_icon=load("res://graphics/player_projectile_icon_wide.png")
+		
 	if shot_available and Input.is_key_pressed(KEY_SPACE):
 		if projectile!=null:
+			if weapons[0] == "weapon_pea":
+				projectile=load("res://scenes/projectile_pea/projectile_pea.tscn")
+			if weapons[0] == "weapon_pancake":
+				projectile=load("res://scenes/projectile_wide/projectile_wide.tscn")
+				projectile_icon=load("res://graphics/player_projectile_icon_wide.png")
 			var projectile_unpacked=projectile.instance()
 			projectile_unpacked.set_position(self.position)
-			owner.add_child(projectile_unpacked)
+			get_node("/root/Root").add_child(projectile_unpacked)
 			shot_available=false
 			get_node("FireRate").start()
-			owner.start_screen_shake()
 
-func enable_shot():
+func enableShot():
 	shot_available=true
 	get_node("FireRate").stop()
 
-func stop_on_screen_edges():
+func stopOnScreenEdges():
 	if position.x<0:
 		position.x=0
 		velocity.x=0
@@ -95,7 +109,7 @@ func _process(delta):
 	checkLife()
 	shooting()
 	applyMovement()
-	stop_on_screen_edges()
+	stopOnScreenEdges()
 	translate(velocity*delta)
 
 func onAreaEntered(area):

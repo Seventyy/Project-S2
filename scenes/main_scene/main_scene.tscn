@@ -20,18 +20,18 @@ texture = ExtResource( 4 )
 layer_speed = 180.0
 
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 594.547, 221.826 )
+position = Vector2( 669.504, 69.3276 )
 scale = Vector2( 1, 1.00911 )
 speed = 500.0
 target_list = [ Vector2( 1280, 200 ), Vector2( 0, 200 ) ]
 
 [node name="Enemy2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1019.67, 369.614 )
+position = Vector2( 168.008, 262.333 )
 speed = 500.0
 target_list = [ Vector2( 1280, 300 ), Vector2( 0, 300 ) ]
 
 [node name="Enemy3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 104.681, 59.4483 )
+position = Vector2( 988.652, 310.15 )
 speed = 500.0
 target_list = [ Vector2( 1280, 50 ), Vector2( 0, 50 ) ]
 
