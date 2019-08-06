@@ -2,9 +2,9 @@ extends Area2D
 
 class_name Enemy
 
-export(float) var hp=1
+export(float) var hp
 onready var max_hp=hp
-export(float) var body_damage=0
+export(float) var body_damage
 
 export(float) var speed
 export(Vector2) var velocity
@@ -18,7 +18,7 @@ func move(delta):
 	position+=velocity.normalized()*speed*delta
 
 func modulateSprite():
-	if sprite_color_modulation:
+	if sprite_color_modulation==true:
 		color_modulation=Color(1,hp/max_hp,hp/max_hp)
 		for i in get_child_count():
 			if get_child(i) is Sprite:
