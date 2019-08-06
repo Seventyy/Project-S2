@@ -57,7 +57,7 @@ func applyMovement():
 #		velocity-=velocity.normalized()*friction
 #		if velocity.length()<friction:
 #			velocity=Vector2(0,0)
-#
+
 
 func shooting():
 	if shot_available and Input.is_key_pressed(KEY_SPACE):
