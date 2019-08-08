@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/win_screen.png-04463b74ce75af842eb3f7f107c9dc98.stex"
+path="res://.import/pickup_heart.png-03a64ceab657c9e55c0e647677f34bd3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/win_screen.png"
-dest_files=[ "res://.import/win_screen.png-04463b74ce75af842eb3f7f107c9dc98.stex" ]
+source_file="res://graphics/pickup_heart.png"
+dest_files=[ "res://.import/pickup_heart.png-03a64ceab657c9e55c0e647677f34bd3.stex" ]
 
 [params]
 
