@@ -20,3 +20,7 @@ margin_left = 1209.46
 margin_top = 642.86
 margin_right = 1249.46
 margin_bottom = 682.86
+
+[node name="CoinCounter" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0

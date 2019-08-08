@@ -11,6 +11,7 @@ radius = 51.548
 script = ExtResource( 2 )
 hp = 10.0
 body_damage = 25.0
+coin_amount = 100
 speed = 50.0
 
 [node name="Sprite" parent="." index="0"]

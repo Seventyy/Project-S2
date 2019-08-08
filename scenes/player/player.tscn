@@ -1,10 +1,13 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
-[ext_resource path="res://scenes/projectile_pea/projectile_pea.tscn" type="PackedScene" id=2]
-[ext_resource path="res://graphics/player_ship.png" type="Texture" id=3]
+[ext_resource path="res://graphics/player_ship.png" type="Texture" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 0, -50, 45, 50, -45, 50 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 200.0
 
 [node name="Player" type="Area2D"]
 script = ExtResource( 1 )
@@ -12,18 +15,23 @@ __meta__ = {
 "_edit_group_": true
 }
 hp = 10.0
-projectile = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 16 )
-scale = Vector2( 5, 6.5 )
 shape = SubResource( 1 )
 
 [node name="FireRate" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="CoinAura" type="Area2D" parent="."]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoinAura"]
+shape = SubResource( 2 )
 [connection signal="area_entered" from="." to="." method="onAreaEntered"]
+[connection signal="body_entered" from="." to="." method="onBodyEntered"]
 [connection signal="timeout" from="FireRate" to="." method="enableShot"]
+[connection signal="body_entered" from="CoinAura" to="." method="onBodyEnteredaCoinArea"]

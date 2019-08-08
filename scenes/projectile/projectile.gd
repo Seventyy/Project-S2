@@ -3,6 +3,7 @@ extends Area2D
 class_name Projectile
 
 export(float, 0, 1000) var damage
+export(float, 0, 1000) var shot_speed
 export(float, 0, 1000) var speed
 export(float, 0, 1000) var screenshake_scale
 export(float, 0, 1000) var screenshake_time

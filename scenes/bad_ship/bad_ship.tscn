@@ -7,9 +7,10 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 50.0
 
-[node name="Enemy" instance=ExtResource( 1 )]
+[node name="Enemy" index="0" instance=ExtResource( 1 )]
 hp = 20.0
 body_damage = 2.0
+coin_amount = 50
 speed = 100.0
 projectile = ExtResource( 2 )
 

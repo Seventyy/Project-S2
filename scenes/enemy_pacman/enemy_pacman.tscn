@@ -9,6 +9,7 @@ extents = Vector2( 100, 100 )
 
 [node name="Enemy" index="0" instance=ExtResource( 1 )]
 hp = 20.0
+coin_amount = 500
 speed = 50.0
 projectile = ExtResource( 2 )
 

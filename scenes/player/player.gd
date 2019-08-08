@@ -6,7 +6,7 @@ export(float) var hp
 onready var max_hp=hp
 export(float) var body_damage
 
-export(PackedScene) var projectile
+var projectile=load("res://scenes/projectile_pea/projectile_pea.tscn")
 var projectile_icon = load("res://graphics/player_projectile_icon_pea.png")
 
 var velocity = Vector2()
@@ -25,8 +25,11 @@ const DOWN=Vector2(0,1)
 const LEFT=Vector2(-1,0)
 const RIGHT=Vector2(1,0)
 
+var dodge_mode=false
 var shot_available=false
 var weapons = ["weapon_pea", "weapon_pancake"]
+
+var picked_coins=0
 
 func _ready():
 	set_position(Vector2(get_viewport().size.x/2,get_viewport().size.y*0.90))
@@ -43,6 +46,16 @@ func applyMovement():
 		direction+=LEFT
 	if Input.is_key_pressed(KEY_D):
 		direction+=RIGHT
+	if Input.is_action_just_pressed("Dodge_Mode_Toggle"):
+		dodge_mode=!dodge_mode
+		if dodge_mode:
+			$Sprite.texture=load("res://graphics/player_ship_dodge_mode.png")
+			$CollisionShape2D.scale=Vector2(0.2,0.2)
+			$CoinAura.monitoring=true
+		else:
+			$Sprite.texture=load("res://graphics/player_ship.png")
+			$CollisionShape2D.scale=Vector2(1,1)
+			$CoinAura.monitoring=false
 	
 	direction=direction.normalized()
 	
@@ -54,12 +67,6 @@ func applyMovement():
 		velocity.y+=direction.y*down_speed/acceleration
 	
 	velocity*=friction 
-	
-#	if not (Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_S) or Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_D)):
-#		velocity-=velocity.normalized()*friction
-#		if velocity.length()<friction:
-#			velocity=Vector2(0,0)
-
 
 func shooting():
 	if Input.is_action_just_pressed("Weapon_Change"):
@@ -76,12 +83,12 @@ func shooting():
 				projectile=load("res://scenes/projectile_pea/projectile_pea.tscn")
 			if weapons[0] == "weapon_pancake":
 				projectile=load("res://scenes/projectile_wide/projectile_wide.tscn")
-				projectile_icon=load("res://graphics/player_projectile_icon_wide.png")
 			var projectile_unpacked=projectile.instance()
 			projectile_unpacked.set_position(self.position)
 			get_node("/root/Root").add_child(projectile_unpacked)
 			shot_available=false
-			get_node("FireRate").start()
+			$FireRate.wait_time=projectile_unpacked.shot_speed
+			$FireRate.start()
 
 func enableShot():
 	shot_available=true
@@ -105,7 +112,6 @@ func checkLife():
 	if hp<=0:
 		get_tree().queue_delete(self)
 		get_tree().change_scene("res://scenes/death_screen/death_screen.tscn")
-		stages.set_process(false)
 
 func _process(delta):
 	checkLife()
@@ -122,4 +128,17 @@ func onAreaEntered(area):
 	elif area is Enemy:
 		area.hp-=self.body_damage
 		self.hp-=area.body_damage
-	pass
+
+func onBodyEntered(body):
+	if body is Coin:
+		picked_coins+=1
+		body.queue_free()
+
+func onBodyEnteredaCoinArea(body):
+	if body is Coin:
+		body.linear_velocity=Vector2()
+		body.gravity_scale=0
+		body.apply_central_impulse((position-body.position).normalized()*10)
+		picked_coins+=1
+		body.queue_free()
+	
