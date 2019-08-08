@@ -2,10 +2,10 @@ extends Area2D
 
 class_name Projectile
 
-export(float, 0) var damage
-export(float, 0) var speed
-export(float, 0) var screenshake_scale
-export(float, 0) var screenshake_time
+export(float, 0, 1000) var damage
+export(float, 0, 1000) var speed
+export(float, 0, 1000) var screenshake_scale
+export(float, 0, 1000) var screenshake_time
 export(int, "quadratic", "linear") var screenshake_type
 export(Vector2) var velocity
 

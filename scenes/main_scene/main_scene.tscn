@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/main_scene/main_scene.gd" type="Script" id=1]
 [ext_resource path="res://scenes/parallax_layer/parallax_layer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://graphics/background_base.png" type="Texture" id=3]
 [ext_resource path="res://graphics/background_clouds.png" type="Texture" id=4]
-[ext_resource path="res://scenes/bad_ship_pattern/bad_ship_pattern.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/interface/interface.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/interface/interface.tscn" type="PackedScene" id=6]
 
 [node name="Root" type="Node2D"]
 script = ExtResource( 1 )
@@ -19,14 +18,9 @@ layer_speed = 100.0
 texture = ExtResource( 4 )
 layer_speed = 180.0
 
-[node name="EnemyPattern" parent="." instance=ExtResource( 5 )]
-position = Vector2( 609.993, 240.378 )
-speed = 100.0
-target_list = [ Vector2( 0, 200 ), Vector2( 1280, 200 ) ]
-
-[node name="Player" parent="." instance=ExtResource( 6 )]
+[node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 608.124, 559.08 )
 hp = 50.0
 body_damage = 10.0
 
-[node name="Interface" parent="." instance=ExtResource( 7 )]
+[node name="Interface" parent="." instance=ExtResource( 6 )]

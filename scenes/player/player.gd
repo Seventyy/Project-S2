@@ -105,6 +105,7 @@ func checkLife():
 	if hp<=0:
 		get_tree().queue_delete(self)
 		get_tree().change_scene("res://scenes/death_screen/death_screen.tscn")
+		stages.set_process(false)
 
 func _process(delta):
 	checkLife()

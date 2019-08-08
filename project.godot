@@ -44,6 +44,7 @@ run/main_scene="res://scenes/main_scene/main_scene.tscn"
 [autoload]
 
 screen_shake="*res://scenes/main_scene/screen_shake.gd"
+stages="*res://scenes/main_scene/stages.gd"
 
 [display]
 
