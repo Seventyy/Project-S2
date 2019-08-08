@@ -12,6 +12,7 @@ radius = 50.0
 script = ExtResource( 2 )
 hp = 20.0
 body_damage = 2.0
+coin_amount = 50
 speed = 100.0
 projectile = ExtResource( 3 )
 

@@ -4,6 +4,7 @@ var current_target
 export(Array) var target_list
 var target_list_iterator=0
 
+
 func move(delta):
 	if target_list.size()>0:
 		if velocity.length()<(velocity.normalized()*speed*delta).length():

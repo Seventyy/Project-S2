@@ -9,6 +9,7 @@ height = 360.0
 
 [node name="Projectile" instance=ExtResource( 1 )]
 damage = 1.0
+shot_speed = 0.1
 speed = 500.0
 screenshake_scale = 20.0
 screenshake_time = 5.0

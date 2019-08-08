@@ -6,9 +6,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 25.4328
 
-[node name="Projectile" index="0" instance=ExtResource( 1 )]
-damage = 4.0
-speed = 500.0
+[node name="Projectile" instance=ExtResource( 1 )]
 velocity = Vector2( 0, -1 )
 dmg_enemies = true
 

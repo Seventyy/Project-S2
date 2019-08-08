@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/main_scene/main_scene.gd" type="Script" id=1]
 [ext_resource path="res://scenes/parallax_layer/parallax_layer.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/bad_ship_pattern/bad_ship_pattern.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/interface/interface.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/coin_blockade/coin_blockade.tscn" type="PackedScene" id=8]
 
 [node name="Root" type="Node2D"]
 script = ExtResource( 1 )
@@ -26,7 +27,11 @@ target_list = [ Vector2( 0, 200 ), Vector2( 1280, 200 ) ]
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
 position = Vector2( 608.124, 559.08 )
+collision_mask = 0
 hp = 50.0
 body_damage = 10.0
 
 [node name="Interface" parent="." instance=ExtResource( 7 )]
+
+[node name="AntiCoinBlockade" parent="." instance=ExtResource( 8 )]
+[connection signal="body_entered" from="Player" to="Player" method="onBodyEntered"]
